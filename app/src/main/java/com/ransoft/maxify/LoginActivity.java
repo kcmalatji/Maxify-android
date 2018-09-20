@@ -30,6 +30,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,18 +47,54 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity{
 
+    ArrayList<User> user_profile=new ArrayList<>();
+
+    private Connection connect=null;
+    private Statement statement = null;
+    private ResultSet resultSet=null;
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
         Button btn = (Button)findViewById(R.id.email_sign_in_button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+
+                try {
+//                    readDataBase();
+                    startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
+
+
     }
+
+    public void readDataBase(int phone_number) throws Exception{
+        Class.forName("com.mysql.jdbc.Driver");
+        connect=DriverManager.getConnection("jdbc:mysql://164.160.91.27:3306/ransoftc_maxify?autoReconnect=true&useSSL=false&"+"user=ransoftc_ransoft&password=Builditfromscratch@2018");
+        statement= connect.createStatement();
+        resultSet=statement.executeQuery("SELECT id FROM ransoftc_maxify.pasenger WHERE email='"+phone_number +"'");
+
+        getid(resultSet);
+
+    }
+    public String getid(ResultSet resultSet)throws SQLException {
+
+        while (resultSet.next()) {
+            User user = new User();
+            userid = resultSet.getString("id");
+        }
+        System.out.println(userid);
+        return userid;
+
+    }
+
 }
 
