@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="#5fb0c9"
+android:background="@drawable/map"
 android:orientation="vertical"
 android:scrollbarAlwaysDrawVerticalTrack="true">
+
 
 <TextView
     android:id="@+id/login_title"
@@ -13,8 +14,8 @@ android:scrollbarAlwaysDrawVerticalTrack="true">
     android:layout_marginBottom="16dp"
     android:layout_marginTop="22dp"
     android:gravity="center_horizontal"
-    android:text="Verify Number"
-    android:textColor="#fff"
+
+    android:textColor="#000000"
     android:textSize="26sp"
     android:textStyle="bold" />
 
@@ -25,7 +26,7 @@ android:scrollbarAlwaysDrawVerticalTrack="true">
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:layout_marginTop="70dp"
-    android:background="#fff"
+    android:background="#E6FFFFFF"
     android:elevation="4dp"
     android:orientation="vertical"
     android:padding="20dp">
@@ -44,9 +45,10 @@ android:scrollbarAlwaysDrawVerticalTrack="true">
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/email"
+
                 android:drawableTint="#FF4081"
                 android:singleLine="true"
-                android:hint="Number"
+                android:hint="Cellphone Number"
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
  <TextView
@@ -77,7 +79,7 @@ android:scrollbarAlwaysDrawVerticalTrack="true">
     android:layout_below="@+id/login_title"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="16dp"
-
+android:background="@drawable/profile"
     android:elevation="4dp"
     />
 </RelativeLayout>
