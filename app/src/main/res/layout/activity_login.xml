@@ -48,7 +48,7 @@ android:scrollbarAlwaysDrawVerticalTrack="true">
 
                 android:drawableTint="#FF4081"
                 android:singleLine="true"
-                android:hint="Cellphone Number"
+                android:hint="@string/cellphone_number"
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
  <TextView
