@@ -31,5 +31,4 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
     compile 'net.sourceforge.jtds:jtds:1.3.1'
 
-
 }
