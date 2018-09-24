@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                             "Please enter the credentials!", Toast.LENGTH_LONG)
                             .show();
                 }
+
             }
 
         });

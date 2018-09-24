@@ -44,8 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         inputFullName = (EditText) findViewById(R.id.name);
+        final EditText  inputsurname = (EditText) findViewById(R.id.surname);
         inputEmail = (EditText) findViewById(R.id.email);
-//        inputPassword = (EditText) findViewById(R.id.password);
+        inputPassword = (EditText) findViewById(R.id.number);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
@@ -73,10 +74,11 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
-                String password = inputPassword.getText().toString().trim();
+                int number = Integer.parseInt(inputPassword.getText().toString().trim());
+                String surname= inputsurname.getText().toString().trim();
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerUser(name, email, password);
+                if (!name.isEmpty() && !email.isEmpty() && surname.isEmpty() ) {
+                    registerUser(name,surname, email, number);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
@@ -102,8 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void registerUser(final String name, final String email,
-                              final String password) {
+    private void registerUser(final String name, final String surname,
+                              final String email, final int number) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
@@ -124,16 +126,17 @@ public class RegisterActivity extends AppCompatActivity {
                     if (!error) {
                         // User successfully stored in MySQL
                         // Now store the user in sqlite
-                        String uid = jObj.getString("uid");
+                        String uid = jObj.getString("user_id");
 
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
+                        String surname = user.getString("surname");
                         String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
+                        String number = user
+                                .getString("number");
 
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
+                        db.addUser(name, email, uid, number);
 
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
@@ -172,8 +175,9 @@ public class RegisterActivity extends AppCompatActivity {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("name", name);
+                params.put("surname", surname);
                 params.put("email", email);
-                params.put("password", password);
+//                params.put("number", number);
 
                 return params;
             }
